@@ -68,6 +68,7 @@ internal class PaymentFacilitator(
         )
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun handleIntent(intent: Intent) {
         // TODO - handle intent with action delegate
     }
