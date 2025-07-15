@@ -8,6 +8,7 @@
 
 package com.adyen.checkout.core.components.internal
 
+import android.content.Intent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.Lifecycle
@@ -34,10 +35,6 @@ internal class PaymentFacilitator(
         paymentDelegate.ViewFactory(modifier)
     }
 
-    fun submit() {
-        paymentDelegate.submit()
-    }
-
     fun observe(lifecycle: Lifecycle) {
         paymentDelegate.eventFlow
             .flowWithLifecycle(lifecycle)
@@ -45,13 +42,33 @@ internal class PaymentFacilitator(
             .onEach { event ->
                 componentEventHandler.onPaymentComponentEvent(event)
             }.launchIn(coroutineScope)
+
+        checkoutController.events
+            .flowWithLifecycle(lifecycle)
+            .onEach { event ->
+                when (event) {
+                    CheckoutController.Event.Submit -> submit()
+                    is CheckoutController.Event.HandleAction -> handleAction(event.action)
+                    is CheckoutController.Event.HandleIntent -> handleIntent(event.intent)
+                }
+            }
+            .launchIn(coroutineScope)
     }
 
-    fun handleAction(action: Action) {
+    private fun submit() {
+        // TODO - what if we are handling an action?
+        paymentDelegate.submit()
+    }
+
+    private fun handleAction(action: Action) {
         // TODO - Store the actionDelegate
         actionProvider.get(
             action = action,
             coroutineScope = coroutineScope,
         )
+    }
+
+    private fun handleIntent(intent: Intent) {
+        // TODO - handle intent with action delegate
     }
 }
