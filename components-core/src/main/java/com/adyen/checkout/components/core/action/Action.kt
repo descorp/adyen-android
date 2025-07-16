@@ -22,9 +22,9 @@ import org.json.JSONObject
  * exact type of the subclass.
  */
 abstract class Action : ModelObject() {
-    abstract var type: String?
-    abstract var paymentData: String?
-    abstract var paymentMethodType: String?
+    abstract val type: String?
+    abstract val paymentData: String?
+    abstract val paymentMethodType: String?
 
     companion object {
         const val TYPE = "type"
