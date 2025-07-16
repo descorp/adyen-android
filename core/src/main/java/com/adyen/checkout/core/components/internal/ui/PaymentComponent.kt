@@ -14,9 +14,9 @@ import com.adyen.checkout.core.components.internal.BaseComponentState
 // TODO - Some delegates might not be composable,
 //  Move ComposableDelegate to PaymentMethod specific delegate later
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-interface PaymentDelegate<T : BaseComponentState> :
-    ComposableDelegate,
-    EventDelegate<T> {
+interface PaymentComponent<T : BaseComponentState> :
+    ComposableComponent,
+    EventComponent<T> {
 
     fun submit()
 }

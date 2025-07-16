@@ -19,14 +19,14 @@ import com.adyen.checkout.core.action.data.Action
 import com.adyen.checkout.core.action.internal.ActionComponent
 import com.adyen.checkout.core.action.internal.ActionProvider
 import com.adyen.checkout.core.components.CheckoutResult
-import com.adyen.checkout.core.components.internal.ui.PaymentDelegate
+import com.adyen.checkout.core.components.internal.ui.PaymentComponent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 internal class PaymentFacilitator(
-    private val paymentDelegate: PaymentDelegate<BaseComponentState>,
+    private val paymentDelegate: PaymentComponent<BaseComponentState>,
     private val coroutineScope: CoroutineScope,
     private val componentEventHandler: ComponentEventHandler<BaseComponentState>,
     private val actionProvider: ActionProvider,

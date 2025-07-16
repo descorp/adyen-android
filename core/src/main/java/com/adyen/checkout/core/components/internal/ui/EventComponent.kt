@@ -14,7 +14,7 @@ import com.adyen.checkout.core.components.internal.PaymentComponentEvent
 import kotlinx.coroutines.flow.Flow
 
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-interface EventDelegate<T : BaseComponentState> {
+interface EventComponent<T : BaseComponentState> {
 
     val eventFlow: Flow<PaymentComponentEvent<T>>
 }
